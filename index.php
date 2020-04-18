@@ -1,29 +1,31 @@
 <?php
-include_once "Product.php";
-include_once "Mouse.php";
-//Родитель и ребёнок отличаются, прежде всего, свойствами. Если правильно понимаю
+//Подключаем классы
+include_once "Classes/Product.php";
+include_once "Classes/DigitalProduct.php";
+include_once "Classes/OneUnitOfProduct.php";
+include_once "Classes/WeightProduct.php";
 
-//Мышка номер 1
-//Создаём объекты
-$product = new Product;
-$mouse = new Mouse;
-//Задаём значения переменных
-$product->getIt("В наличии",5);
-$mouse->setter("Philips","Мыши","150$");
-//Выводим данные на экран
-$mouse->description();
-$product->show();
+//Создаём объекты классов
+$a = new DigitalProduct;
+$b = new OneUnitOfProduct;
+$c = new WeightProduct;
 
-echo "<hr>";
-//Мышка номер 2
-//Создаём общий объект для двух классов, чтобы обращаться из дочернего к родителю
-$product2 = new Product;
-$product2 = new Mouse;
-//Задаём значения переменных
-$product2->getIt("Нет на складе",0);
-$product2->setter("Sony","Мыши","200$");
-//Выводим данные на экран
-$product2->description();
-$product2->show();
+//Задаём стоимость штучного товара
+$b->setPrice(20);
+//Присваем переменной заданную стоимость штучного товара
+$PriceOfOneUnitProduct = $b->getPrice();
+//На основе цены штучного товара вычисляем и указываем цену цифрового товара. Цена цифры вдвое меньше цены штучного товара
+$a->setPrice($PriceOfOneUnitProduct*0.5);
+//Задаём стоимость товара на развес за кг
+$c->setPrice(5);
+//Задаём вес товара на развес
+$c->setWeight(10);
+
+
+//Выводим на экран цены товарров
+echo "Цена цифрового товара составляет ".$a->getPrice()." долларов США<br>";
+echo "Цена штучного товара составляет ".$b->getPrice()." долларов США<br>";
+echo "Цена развесного товара составляет ".$c->getPrice()." долларов США за ".$c->getWeight()." кг";
+
 
 
