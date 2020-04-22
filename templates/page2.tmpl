@@ -1,0 +1,14 @@
+<head>
+    <link rel="stylesheet" href="../styles/page2.css">
+    <link rel="stylesheet" href="../styles/templates.css">
+</head>
+<a href="../index.php" id="buttonBack"><div id="text">Назад</div></a>
+<div>
+    <!-- Выводим картинку с ограничем ширины -->
+    <img src='../{{ i }}' alt='fail load picture' width=60%><br>
+    <!-- Выводим значение столбца clicks, оно же счётчик просмотров выбранной картинки -->
+    <p>Просмотров: {{ checks }} </p>
+</div>
+
+<!-- Подвал сайта -->
+{% include "footer.tmpl" %}
