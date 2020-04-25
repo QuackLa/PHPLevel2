@@ -1,0 +1,64 @@
+<html>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<!-- Шаблон шапки сайта -->
+{% include "header.tmpl" %}
+
+<head>
+    <link rel="stylesheet" href="../styles/page2.css">
+    <link rel="stylesheet" href="../styles/templates.css">
+</head>
+<body>
+<table border="1" width="100%">
+    <tr>
+        <!-- Перебираем массив адресов картинок из нашей БД -->
+        {% for key,value in sites %}
+        <!-- Если картинок более 5, то переходим на следующую строку при помощи команды <br> -->
+        {% if((key+1) % 5 == 0) %}
+        <td><a href="engine/{{ value.url }}?id_employee={{ value.id_employee }}">
+        <img src="{{ value.file_address }}" alt='fail' width=100% height=200></a></td><br>
+    </tr>
+    <tr>
+        {% else %}
+        <td><a href="engine/{{ value.url }}?id_employee={{ value.id_employee }}">
+        <img src="{{ value.file_address }}" alt='fail' width=100% height=200></a></td>
+        {% endif %}
+        {% endfor %}
+    </tr>
+      <tr>
+        <!-- Перебираем массив адресов картинок из нашей БД -->
+        {% for keys,values in keke %}
+        <!-- Если картинок более 5, то переходим на следующую строку при помощи команды <br> -->
+        {% if((keys+1) % 5 == 0) %}
+        <td><a href="engine/{{ values.url }}?id_employee={{ values.id_employee }}">
+        <img src="{{ values.file_address }}" alt='fail' width=100% height=200></a></td><br>
+        {% endif %}
+        {% endfor %}
+    </tr>
+</table>
+
+<form id="form">
+    <input type="submit" value="Показать ещё">
+</form>
+
+<!-- Шаблон футера -->
+{% include "footer.tmpl" %}
+
+<!-- Подключаем аякс -->
+<script>
+$("#form").on('submit', function(){
+	$.ajax({
+		url: '../engine/page1.php',
+		type: 'POST',
+		data: {status: 'yes'},// Без этой фигни данные формы не собираются. Их можно указать статично разве что. 
+		// Синтаксис data: {login: '123', password: '223'},  ; Вместо значений можно вставлять код php
+		success: function(data) { // Дата - это данные, которые мы передаём. То есть это $_POST['login'] в данном случаи
+			alert(data)
+		}
+	})
+});
+</script>
+
+</body>
+</html>
+
+       
